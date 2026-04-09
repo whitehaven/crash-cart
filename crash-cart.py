@@ -5,7 +5,7 @@ from math import exp
 # pyright: reportUnusedCallResult = false
 
 E_es = 2.0
-HR = 60
+hr = 60
 P_ed = 10
 k_Rhy = 1.0
 E_ed = 0.1
@@ -14,12 +14,13 @@ C_a = 1.5
 SVR = 20
 T_d = 0.3
 
-sbp = 120
-dbp = 80
-hr = 75
+tau = C_a * SVR
+sv = E_es * P_ed * k_Rhy / (E_ed * (E_a + E_es))
+sbp = E_a * sv
+dbp = sbp * exp(-T_d / tau)
 
 prev_E_es = E_es
-prev_HR = HR
+prev_hr = hr
 prev_P_ed = P_ed
 prev_k_Rhy = k_Rhy
 prev_E_ed = E_ed
@@ -41,8 +42,8 @@ def gm_view():
                 "outlined"
             )
         with ui.row().classes("items-center gap-4"):
-            ui.label("HR:")
-            hr_param_input = ui.number(value=HR, min=20, max=250).props("outlined")
+            ui.label("hr:")
+            hr_param_input = ui.number(value=hr, min=20, max=250).props("outlined")
         with ui.row().classes("items-center gap-4"):
             ui.label("P_ed:")
             p_ed_input = ui.number(value=P_ed, min=0, max=50).props("outlined")
@@ -128,7 +129,7 @@ def gm_view():
                 dbp, \
                 hr, \
                 prev_E_es, \
-                prev_HR, \
+                prev_hr, \
                 prev_P_ed, \
                 prev_k_Rhy, \
                 prev_E_ed, \
@@ -139,8 +140,8 @@ def gm_view():
             changed = []
             if e_es_input.value != prev_E_es:
                 changed.append(f"E_es: {prev_E_es:.2f} -> {e_es_input.value:.2f}")
-            if hr_param_input.value != prev_HR:
-                changed.append(f"HR: {prev_HR} -> {hr_param_input.value}")
+            if hr_param_input.value != prev_hr:
+                changed.append(f"hr: {prev_hr} -> {hr_param_input.value}")
             if p_ed_input.value != prev_P_ed:
                 changed.append(f"P_ed: {prev_P_ed:.2f} -> {p_ed_input.value:.2f}")
             if k_rhy_input.value != prev_k_Rhy:
@@ -168,7 +169,7 @@ def gm_view():
             hr = hr_param_input.value
 
             prev_E_es = e_es_input.value
-            prev_HR = hr_param_input.value
+            prev_hr = hr_param_input.value
             prev_P_ed = p_ed_input.value
             prev_k_Rhy = k_rhy_input.value
             prev_E_ed = e_ed_input.value
