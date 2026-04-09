@@ -1,4 +1,5 @@
 from nicegui import ui
+from math import exp
 
 # pyright: reportUnknownMemberType = false
 # pyright: reportUnusedCallResult = false
@@ -100,7 +101,7 @@ def gm_view():
             )
             co = sv * hr_param_input.value
             sbp = e_a_input.value * sv
-            dbp = sbp * __import__("math").exp(-t_d_input.value / tau)
+            dbp = sbp * exp(-t_d_input.value / tau)
             tau_label.text = f"{tau:.2f}"
             sv_label.text = f"{sv:.2f}"
             co_label.text = f"{co:.2f}"
@@ -163,7 +164,7 @@ def gm_view():
                 / (e_ed_input.value * (e_a_input.value + e_es_input.value))
             )
             sbp = e_a_input.value * sv
-            dbp = sbp * __import__("math").exp(-t_d_input.value / tau)
+            dbp = sbp * exp(-t_d_input.value / tau)
             hr = hr_param_input.value
 
             prev_E_es = e_es_input.value

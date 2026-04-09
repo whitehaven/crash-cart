@@ -56,69 +56,77 @@ def _():
 
 @app.cell
 def _():
-    sy.Eq(SV,E_es*(EDV-V_0)/(E_es+E_a))
+    sy.Eq(SV, E_es * (EDV - V_0) / (E_es + E_a))
     return
 
 
 @app.cell
 def _():
-    sy.Eq(SV,E_es*(EDV-V_0)/(E_es+E_a)).subs({EDV:V_0+P_ed/E_ed,V_0:20,E_es:2.0,E_a:1.5})
+    sy.Eq(SV, E_es * (EDV - V_0) / (E_es + E_a)).subs(
+        {EDV: V_0 + P_ed / E_ed, V_0: 20, E_es: 2.0, E_a: 1.5}
+    )
     return
 
 
 @app.cell
 def _():
-    sy.Eq(SV,E_es*(EDV-V_0)/(E_es+E_a))
+    sy.Eq(SV, E_es * (EDV - V_0) / (E_es + E_a))
     return
 
 
 @app.cell
 def _():
-    sy.Eq(EDV,V_0+P_ed/E_ed)
+    sy.Eq(EDV, V_0 + P_ed / E_ed)
     return
 
 
 @app.cell
 def _():
-    sy.Eq(EDV,V_0+P_ed/E_ed)
+    sy.Eq(EDV, V_0 + P_ed / E_ed)
     return
 
 
 @app.cell
 def _():
-    sy.Eq(CO,HR*SV*k_Rhy)
+    sy.Eq(CO, HR * SV * k_Rhy)
     return
 
 
 @app.cell
 def _():
     # the mega equation (linearized to hell though)
-    sy.Eq(CO,HR*SV*k_Rhy).subs({SV:E_es*(EDV-V_0)/(E_es+E_a)}).subs({EDV:V_0+P_ed/E_ed})
+    sy.Eq(CO, HR * SV * k_Rhy).subs({SV: E_es * (EDV - V_0) / (E_es + E_a)}).subs(
+        {EDV: V_0 + P_ed / E_ed}
+    )
     return
 
 
 @app.cell
 def _():
     # the mega equation (linearized to hell though)
-    print(sy.Eq(CO,HR*SV*k_Rhy).subs({SV:E_es*(EDV-V_0)/(E_es+E_a)}).subs({EDV:V_0+P_ed/E_ed}))
+    print(
+        sy.Eq(CO, HR * SV * k_Rhy)
+        .subs({SV: E_es * (EDV - V_0) / (E_es + E_a)})
+        .subs({EDV: V_0 + P_ed / E_ed})
+    )
     return
 
 
 @app.cell
 def _():
-    sy.Eq(k_Rhy_NSR,1.0)
+    sy.Eq(k_Rhy_NSR, 1.0)
     return
 
 
 @app.cell
 def _():
-    sy.Eq(k_Rhy_Afib,0.8)
+    sy.Eq(k_Rhy_Afib, 0.8)
     return
 
 
 @app.cell
 def _():
-    sy.Eq(SBP,E_a*SV)
+    sy.Eq(SBP, E_a * SV)
     return
 
 
@@ -130,31 +138,33 @@ def _():
 
 @app.cell
 def _():
-    sy.Eq(PP,SV/C_a).subs({SV:80,C_a:1.5})
+    sy.Eq(PP, SV / C_a).subs({SV: 80, C_a: 1.5})
     return
 
 
 @app.cell
 def _():
-    sy.Eq(DBP,SBP*sy.exp(-T_d/tau))
+    sy.Eq(DBP, SBP * sy.exp(-T_d / tau))
     return
 
 
 @app.cell
 def _():
-    sy.Eq(T_d,2/3*60/HR)
+    sy.Eq(T_d, 2 / 3 * 60 / HR)
     return
 
 
 @app.cell
 def _():
-    sy.Eq(tau,SVR*C_a)
+    sy.Eq(tau, SVR * C_a)
     return
 
 
 @app.cell
 def _():
-    sy.Eq(DBP,SBP*sy.exp(-T_d/tau)).subs({tau:SVR*C_a,T_d:2/3*60/HR,SBP:E_a*SV})
+    sy.Eq(DBP, SBP * sy.exp(-T_d / tau)).subs(
+        {tau: SVR * C_a, T_d: 2 / 3 * 60 / HR, SBP: E_a * SV}
+    )
     return
 
 
